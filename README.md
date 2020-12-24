@@ -1,24 +1,21 @@
-# README
+# Running MiniKube on Development Env
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install on Debian
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_arm64.deb
+sudo dpkg -i minikube_latest_arm64.deb
+```
+## Starting MiniKube
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If we are running MiniKube using Docker driver, remember to add current user to docker group
+```
+sudo usermod -aG docker $USER
+```
+Start MiniKube using
+```
+minikube start --driver=docker
+```
+Open MiniKube Dashboard
+```
+minikube dashboard
+```

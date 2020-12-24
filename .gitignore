@@ -39,3 +39,4 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+minikube_latest_amd64.deb
