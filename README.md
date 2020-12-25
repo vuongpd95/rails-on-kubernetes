@@ -19,3 +19,12 @@ Open MiniKube Dashboard
 ```
 minikube dashboard
 ```
+
+# TODOs
+- [ ] Configure yml file for the app while using local app container
+- [ ] Configure yml file for the load balancer
+- [ ] Configure yml file for Database for the app
+- [ ] Configure yml file for Redis cache
+- [ ] Configure yml file for the search engine using Elastic Search
+- [ ] Configure yml file for logger engine with ELK
+- [ ] Configure SSL for the app
