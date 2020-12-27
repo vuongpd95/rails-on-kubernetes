@@ -78,6 +78,8 @@ kubectl describe pods <NAME>
 - [x] Rake task to handle syncing secrets between k8s & rails
 - [ ] Configure yml file for Database for the app
 - [ ] Configure yml file for Redis cache
-- [ ] Configure yml file for the search engine using Elastic Search
-- [ ] Configure yml file for logger engine with ELK
+- [ ] Configure yml file for Session storage using Redis
+- [ ] Configure yml file for background job service
+- [ ] Configure yml file for the search engine service using Elastic Search
+- [ ] Configure yml file for logging service using ELK stack
 - [ ] Configure SSL for the app
