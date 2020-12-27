@@ -57,3 +57,15 @@ spec:
         ports:
         - containerPort: 3000
           name: http
+        volumeMounts:
+        - name: rok-rails-production-key
+          mountPath: "/usr/src/app/config/credentials"
+          readOnly: true
+      volumes:
+        - name: rok-rails-production-key
+          secret:
+            secretName: rok-production-credentials
+            defaultMode: 0744
+            items:
+            - key: rails_production_key
+              path: production.key

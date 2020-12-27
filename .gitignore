@@ -43,3 +43,5 @@ yarn-debug.log*
 # Ignore local folder
 /local/*
 !/local/.keep
+
+/config/credentials/production.key

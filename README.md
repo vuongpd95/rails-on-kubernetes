@@ -23,6 +23,11 @@ Enable Ingress
 ```
 minikube addons enable ingress
 ```
+Enable Storage Provisioner
+```
+minikube addons enable storage-provisioner
+kubectl get sc
+```
 # Build the docker image for app
 
 ## Build command
@@ -44,20 +49,33 @@ docker run -it --publish 3000:3000 vuongpd95/rails-on-kubernetes:0.1
 // Make sure your image is private
 docker image push vuongpd95/rails-on-kubernetes:0.1
 ```
+# Setup the app secrets
+A rake task to upload secrets from credentials file to kubernetes is provided in `lib/tasks/k8s`
+```
+// To update rok-production-credentials k8s secret
+rake k8s:upload_secrets
+```
 
 # Kubectl commands
 ## Apply a yaml file
 ```
-kubectl apply -f kube/app.yml
+kubectl apply -f k8s/app.yml
 ```
 ## Delete an applied yaml file
 ```
-kubectl delete -f kube/app.yml
+// Great for developing but don't do this on production
+kubectl delete -f k8s/app.yml
 ```
-
+## Debugging a pod
+```
+kubectl get pods -o wide
+kubectl exec -it <NAME> -- bash
+kubectl describe pods <NAME>
+```
 # TODOs
-- [ ] Configure yml file for the app while using local app container
-- [ ] Configure yml file for the load balancer
+- [x] Configure yml file for the app while using local app container
+- [x] Configure yml file for the load balancer
+- [x] Rake task to handle syncing secrets between k8s & rails
 - [ ] Configure yml file for Database for the app
 - [ ] Configure yml file for Redis cache
 - [ ] Configure yml file for the search engine using Elastic Search
