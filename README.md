@@ -76,9 +76,9 @@ kubectl describe pods <NAME>
 - [x] Configure yml file for the app while using local app container
 - [x] Configure yml file for the load balancer
 - [x] Rake task to handle syncing secrets between k8s & rails
-- [ ] Configure yml file for Database for the app
+- [ ] Configure yml file for the primary database
 - [ ] Configure yml file for Redis cache
-- [ ] Configure yml file for Session storage using Redis
+- [ ] Configure yml file for session storage using Redis
 - [ ] Configure yml file for background job service
 - [ ] Configure yml file for the search engine service using Elastic Search
 - [ ] Configure yml file for logging service using ELK stack
