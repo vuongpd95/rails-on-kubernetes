@@ -26,6 +26,7 @@ namespace :k8s do
     end).call('', encrypted.config, k8s_secrets)
     k8s_secrets = k8s_secrets.inject({}, :update)
     k8s_secrets['rails_production_key'] = File.read(key_path)
+    k8s_secrets['rails_production_yml_enc'] = File.read(config_path)
     literals = k8s_secrets.map { |k, v| "--from-literal=#{k}=#{v}" }.join(" ")
     puts `kubectl create secret generic rok-production-credentials #{literals} --dry-run=client -o yaml | kubectl apply -f -`
   end

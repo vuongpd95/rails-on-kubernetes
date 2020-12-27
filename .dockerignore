@@ -31,4 +31,9 @@ local/*
 !local/.keep
 
 # Ignore kubernetes config files
-kube
+k8s
+
+# Ignore credentials key
+config/credentials/*
+config/master.key
+config/credentials.yml.enc

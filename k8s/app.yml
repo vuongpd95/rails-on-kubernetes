@@ -35,7 +35,13 @@ spec:
       - name: rok
         image: vuongpd95/rails-on-kubernetes:0.1
         imagePullPolicy: Never
-        command: ["bundle", "exec", "rails", "server", "-u", "puma", "-p", "3000"]
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - >-
+              cat /var/tmp/rok/credentials/production.key > /usr/src/app/config/credentials/production.key;
+              cat /var/tmp/rok/credentials/production.yml.enc > /usr/src/app/config/credentials/production.yml.enc;
+              bundle exec rails server -u puma -p 3000
         readinessProbe:
           httpGet:
             path: /
@@ -59,7 +65,7 @@ spec:
           name: http
         volumeMounts:
         - name: rok-rails-production-key
-          mountPath: "/usr/src/app/config/credentials"
+          mountPath: "/var/tmp/rok/credentials"
           readOnly: true
       volumes:
         - name: rok-rails-production-key
@@ -69,3 +75,5 @@ spec:
             items:
             - key: rails_production_key
               path: production.key
+            - key: rails_production_yml_enc
+              path: production.yml.enc
