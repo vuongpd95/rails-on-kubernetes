@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-service-db
+# provisioner: kubernetes.io/gce-pd # GCE
+provisioner: k8s.io/minikube-hostpath # minikube
+reclaimPolicy: Retain
+parameters:
+  type: pd-ssd
+  fstype: ext4
+  replication-type: none

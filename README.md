@@ -28,6 +28,13 @@ Enable Storage Provisioner
 minikube addons enable storage-provisioner
 kubectl get sc
 ```
+Operate on minikube node
+```
+minikube ssh
+// E.g. Remove persistence storage in host path
+sudo su
+rm -rf /mnt/data/*
+```
 # Build the docker image for app
 
 ## Build command
@@ -85,3 +92,6 @@ kubectl describe pods <NAME>
 - [ ] Configure yml file for the search engine service using Elastic Search
 - [ ] Configure yml file for logging service using ELK stack
 - [ ] Configure SSL for the app
+
+# Visit later
+- https://stacksoft.io/blog/postgres-statefulset/
