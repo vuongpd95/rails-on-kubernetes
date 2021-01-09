@@ -4,8 +4,12 @@ namespace :k8s do
       config_path = Rails.root.join('config', 'credentials', 'production.yml.enc')
       key_path = Rails.root.join('config', 'credentials', 'production.key')
     else
-      config_path = Rails.root.join('config', 'credentials.yml.enc')
-      key_path = Rails.root.join('config', 'master.key')
+      abort "
+        Use RAILS_ENV=production on your minikube cluster.
+        Remember to create your own production credentials (or clone master credentials)
+      "
+      # config_path = Rails.root.join('config', 'credentials.yml.enc')
+      # key_path = Rails.root.join('config', 'master.key')
     end
     encrypted = ActiveSupport::EncryptedConfiguration.new(
       config_path: config_path,

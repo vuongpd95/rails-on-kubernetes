@@ -45,3 +45,4 @@ yarn-debug.log*
 !/local/.keep
 
 /config/credentials/production.key
+/config/credentials/production.yml.enc
