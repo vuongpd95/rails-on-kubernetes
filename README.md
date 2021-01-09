@@ -53,7 +53,9 @@ docker image push vuongpd95/rails-on-kubernetes:0.1
 A rake task to upload secrets from credentials file to kubernetes is provided in `lib/tasks/k8s`
 ```
 // To update rok-production-credentials k8s secret
-rake k8s:upload_secrets
+// Create your own production credentials
+// Use RAILS_ENV=production for your minikube cluster
+RAILS_ENV=production rake k8s:upload_secrets
 ```
 
 # Kubectl commands

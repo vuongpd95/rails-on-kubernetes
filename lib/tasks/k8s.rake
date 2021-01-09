@@ -6,7 +6,7 @@ namespace :k8s do
     else
       abort "
         Use RAILS_ENV=production on your minikube cluster.
-        Remember to create your own production credentials (or clone master credentials)
+        Remember to create your own production credentials
       "
       # config_path = Rails.root.join('config', 'credentials.yml.enc')
       # key_path = Rails.root.join('config', 'master.key')
