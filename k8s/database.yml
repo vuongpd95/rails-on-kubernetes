@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rok-db
+spec:
+  ports:
+  - port: 5432
+  selector:
+    app: rok-db
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rok-db-deploy
+spec:
+  selector:
+    matchLabels:
+      app: rok-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: rok-db
+    spec:
+      containers:
+      - image: postgres:13.1
+        imagePullPolicy: "IfNotPresent"
+        name: rok-db
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: rok-production-credentials
+                key: rok_db_user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: rok-production-credentials
+                key: rok_db_password
+        ports:
+        - containerPort: 5432
+          name: rok-db
+        volumeMounts:
+        - name: rok-db-persistent-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: rok-db-persistent-storage
+        persistentVolumeClaim:
+          claimName: rok-db-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rok-db-pv
+  labels:
+    app: rok-db
+spec:
+  storageClassName: fast-service-db
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /mnt/data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rok-db-pvc
+spec:
+  storageClassName: fast-service-db
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-service-db
+# provisioner: kubernetes.io/gce-pd
+provisioner: k8s.io/minikube-hostpath
+reclaimPolicy: Retain
+parameters:
+  type: pd-ssd
+  fstype: ext4
+  replication-type: none
