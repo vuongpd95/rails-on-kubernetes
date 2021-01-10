@@ -75,6 +75,10 @@ kubectl apply -f k8s/app.yml
 // Great for developing but don't do this on production
 kubectl delete -f k8s/app.yml
 ```
+## Delete a pod
+```
+kubectl delete pod <NAME>
+```
 ## Debugging a pod
 ```
 kubectl get pods -o wide
