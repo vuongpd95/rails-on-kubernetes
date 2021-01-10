@@ -89,13 +89,21 @@ kubectl describe pods <NAME>
 - [x] Configure yml file for the app while using local app container
 - [x] Configure yml file for the load balancer
 - [x] Rake task to handle syncing secrets between k8s & rails
-- [ ] Configure yml file for the primary database
+- [x] Configure yml file for the primary database
 - [ ] Configure yml file for Redis cache
 - [ ] Configure yml file for session storage using Redis
 - [ ] Configure yml file for background job service
 - [ ] Configure yml file for the search engine service using Elastic Search
 - [ ] Configure yml file for logging service using ELK stack
 - [ ] Configure SSL for the app
+- [ ] Configure yml file for images service
+- [ ] Handle compling & using assets for the application
+- [ ] Add StimulusJS to the app (A good way to organize JS codes, make it independent from CSS classes & ID). For application with simple business logic, we don't need big libraries or frameworks (VueJS, ReactJS, etc.)
+- [ ] Build a small UI component lib using TailwindCSS & view_component gem. By encapsulating TailwindCSS classes into component, we reduce CSS size & in turn, able to embed them directly as internal CSS which leads to improved perceived site performance. Plus, eliminating Turbolinks weakness of slow landing page
+
+# What can be improved?
+- [ ] Use namespace to manage resources (Don't know how to do this yet)
+- [ ] Find a good way to organizing & using labels in Kubernetes
 
 # Visit later
 - https://stacksoft.io/blog/postgres-statefulset/
