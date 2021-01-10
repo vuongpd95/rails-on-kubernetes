@@ -39,8 +39,8 @@ spec:
         args:
           - -c
           - >-
-              cat /var/tmp/rok/credentials/production.key > /usr/src/app/config/credentials/production.key;
-              cat /var/tmp/rok/credentials/production.yml.enc > /usr/src/app/config/credentials/production.yml.enc;
+              ln -s /var/tmp/rok/credentials/production.key /usr/src/app/config/credentials/production.key;
+              ln -s /var/tmp/rok/credentials/production.yml.enc /usr/src/app/config/credentials/production.yml.enc;
               bundle exec rails server -u puma -p 3000
         readinessProbe:
           httpGet:
