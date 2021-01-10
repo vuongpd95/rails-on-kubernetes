@@ -1,10 +1,10 @@
-# Step by steps to run it yourself
+# Step by step to run it yourself
 1. [Install minikube](#running-minikube-on-development-env). And start it using:
 ```
 minikube start --driver=docker
 minikube dashboard
 ```
-2. Build the docker container for the application. This is on local only, don't need to push to Docker Hub. The first command must be run for every new terminal that you open else the docker container built by the second command won't be seen by minikube
+2. Build the docker image for the application. This is on local only, don't need to push to Docker Hub. The first command must be run for every new terminal that you open else the docker image built by the second command won't be seen by minikube
 ```
 eval $(minikube -p minikube docker-env)
 docker build -t vuongpd95/rails-on-kubernetes:0.1 .
@@ -128,7 +128,7 @@ kubectl exec -it <NAME> -- bash
 kubectl describe pods <NAME>
 ```
 # TODOs
-- [x] Configure yml file for the app while using local app container
+- [x] Configure yml file for the app while using local app image
 - [x] Configure yml file for the load balancer
 - [x] Rake task to handle syncing secrets between k8s & rails
 - [x] Configure yml file for the primary database
