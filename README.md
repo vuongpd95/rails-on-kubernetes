@@ -1,3 +1,45 @@
+# Step by steps to run it yourself
+1. [Install minikube](#running-minikube-on-development-env). And start it using:
+```
+minikube start --driver=docker
+minikube dashboard
+```
+2. Build the docker container for the application. This is on local only, don't need to push to Docker Hub. The first command must be run for every new terminal that you open else the docker container built by the second command won't be seen by minikube
+```
+eval $(minikube -p minikube docker-env)
+docker build -t vuongpd95/rails-on-kubernetes:0.1 .
+```
+3. Setup the application production secrets. We will use production env on minikube since we are building configurations for a production ready application
+```
+EDITOR=vi bundle exec rails credentials:edit -e production
+```
+The secret file should have this format
+```yml
+secret_key_base: "Use `rake secret` to get one"
+rok_db:
+  user: "rok_db_user"
+  password: "your chosen password"
+```
+4. Upload the secrets to minikube
+```
+RAILS_ENV=production rake k8s:upload_secrets
+```
+5. Apply yml files to create services
+```
+kubectl apply -f k8s/load_balancer.yml
+kubectl apply -f k8s/db_sc.yml
+kubectl apply -f k8s/db_pv.yml
+kubectl apply -f k8s/db_pvc.yml
+kubectl apply -f k8s/db_service.yml
+kubectl apply -f k8s/app.yml
+```
+6. Go to minikube dashboard, find the Load Balancer IP in the ingress section & access the application from your browser. You can check out the routes:
+```
+/
+/secrets
+/posts
+```
+
 # Running MiniKube on Development Env
 
 ## Install on Debian
@@ -104,6 +146,7 @@ kubectl describe pods <NAME>
 # What can be improved?
 - [ ] Use namespace to manage resources (Don't know how to do this yet)
 - [ ] Find a good way to organizing & using labels in Kubernetes
+- [ ] Using StatefulSet to setup Posgresql DB is better than using Headless service?
 
 # Visit later
 - https://stacksoft.io/blog/postgres-statefulset/
